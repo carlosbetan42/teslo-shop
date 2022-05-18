@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { UiContext } from "../../context";
+import { useRouter } from "next/router";
 import {
   Box,
   Divider,
@@ -25,8 +28,21 @@ import {
 } from "@mui/icons-material";
 
 export const SideMenu = () => {
+  const router = useRouter();
+  const { isMenuOpen, toggleSideMenu } = useContext(UiContext);
+
+  const navigateTo = (url: string) => {
+    toggleSideMenu();
+    router.push(url);
+  };
+
   return (
-    <Drawer open={false} anchor='right' sx={{ backdropFilter: "blur(4px)", transition: "all 0.5s ease-out" }}>
+    <Drawer
+      open={isMenuOpen}
+      onClose={toggleSideMenu}
+      anchor='right'
+      sx={{ backdropFilter: "blur(4px)", transition: "all 0.5s ease-out" }}
+    >
       <Box sx={{ width: 250, paddingTop: 5 }}>
         <List>
           <ListItem>
@@ -61,21 +77,21 @@ export const SideMenu = () => {
             <ListItemIcon>
               <MaleOutlined />
             </ListItemIcon>
-            <ListItemText primary={"Hombres"} />
+            <ListItemText onClick={() => navigateTo("/category/men")} primary={"Hombres"} />
           </ListItem>
 
           <ListItem button sx={{ display: { xs: "", sm: "none" } }}>
             <ListItemIcon>
               <FemaleOutlined />
             </ListItemIcon>
-            <ListItemText primary={"Mujeres"} />
+            <ListItemText onClick={() => navigateTo("/category/women")} primary={"Mujeres"} />
           </ListItem>
 
           <ListItem button sx={{ display: { xs: "", sm: "none" } }}>
             <ListItemIcon>
               <EscalatorWarningOutlined />
             </ListItemIcon>
-            <ListItemText primary={"Niños"} />
+            <ListItemText onClick={() => navigateTo("/category/kid")} primary={"Niños"} />
           </ListItem>
 
           <ListItem button>
