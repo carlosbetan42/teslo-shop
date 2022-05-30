@@ -32,3 +32,7 @@ Llamará:
 ```
 http://localhost:3003/api/seed
 ```
+
+## Extras
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
