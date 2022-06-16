@@ -3,8 +3,16 @@ import { Box, Button, Card, CardContent, Divider, Grid, Typography, Link } from 
 import NextLink from "next/link";
 import { CartList, OrderSummary } from "../../components/cart";
 import { ShopLayout } from "../../components/layouts";
+import { useContext } from "react";
+import { CartContext } from "../../context";
 
 const SummaryPage = () => {
+  const { shippingAddress } = useContext(CartContext);
+
+  if (!shippingAddress) {
+    return <></>;
+  }
+
   return (
     <ShopLayout title={"Resumen de orden"} pageDescription={"Resumen de la orden"}>
       <Typography variant='h1' component='h1'>
@@ -28,7 +36,7 @@ const SummaryPage = () => {
                 </NextLink>
               </Box>
 
-              <Typography>Nombre nombre</Typography>
+              <Typography>{shippingAddress.firstName}</Typography>
               <Typography>323 algun lugar</Typography>
               <Typography>Ciudad, HYA 234</Typography>
               <Typography>Kuwait</Typography>
