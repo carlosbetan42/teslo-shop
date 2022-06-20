@@ -1,5 +1,9 @@
 export const countries = [
   {
+    name: "Selecciona una opción",
+    code: "",
+  },
+  {
     name: "Costa Rica",
     code: "CRI",
   },

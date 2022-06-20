@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Box, Button, FormControl, Grid, MenuItem, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, TextField, Typography } from "@mui/material";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -26,7 +26,7 @@ const getAddressFromCookies = (): FormData => {
     address2: Cookies.get("address2") || "",
     zip: Cookies.get("zip") || "",
     city: Cookies.get("city") || "",
-    country: Cookies.get("country") || countries[0].code,
+    country: Cookies.get("country") || "",
     phone: Cookies.get("phone") || "",
   };
 };
@@ -126,15 +126,16 @@ const AddressPage = () => {
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <TextField
+                id='select'
                 select
                 variant='filled'
                 label='País'
-                defaultValue={countries[0].code}
+                defaultValue={Cookies.get("country") || ""}
                 {...register("country", {
                   required: "Este campo es requerido",
                 })}
                 error={!!errors.country}
-                // helperText={errors.country?.message}
+                helperText={errors.country?.message}
               >
                 {countries.map((country) => (
                   <MenuItem key={country.code} value={country.code}>
