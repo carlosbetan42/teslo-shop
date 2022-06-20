@@ -32,6 +32,7 @@ const LoginPage = () => {
     if (!isValidLogin) {
       setShowError(true);
       setTimeout(() => setShowError(false), 3000);
+      return;
     }
 
     const destination = router.query.p?.toString() || "/";

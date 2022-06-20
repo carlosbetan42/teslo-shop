@@ -35,7 +35,7 @@ const checkJWT = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     userId = await jwt.isValidToken(token as string);
   } catch (error) {
-    return res.status(401).json({ message: "Token de auorización no es válido" });
+    return res.status(401).json({ message: "Token de autorización no es válido" });
   }
 
   await db.connect();
