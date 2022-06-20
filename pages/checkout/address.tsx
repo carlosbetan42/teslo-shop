@@ -130,7 +130,7 @@ const AddressPage = () => {
                 select
                 variant='filled'
                 label='País'
-                defaultValue={Cookies.get("country") || ""}
+                defaultValue={Cookies.get("country") || countries[0].code}
                 {...register("country", {
                   required: "Este campo es requerido",
                 })}
