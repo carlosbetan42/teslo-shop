@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { ShopLayout } from "../../components/layouts/ShopLayout";
 import { countries } from "../../utils/countries";
 import { CartContext } from "../../context/cart/CartContext";
+import { useEffect } from "react";
 
 type FormData = {
   firstName: string;
@@ -39,9 +40,23 @@ const AddressPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
-    defaultValues: getAddressFromCookies(),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      address: "",
+      address2: "",
+      zip: "",
+      city: "",
+      country: "",
+      phone: "",
+    },
   });
+
+  useEffect(() => {
+    reset(getAddressFromCookies());
+  }, []);
 
   const onSubmitAddress = (data: FormData) => {
     updateAddress(data);
@@ -126,11 +141,12 @@ const AddressPage = () => {
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <TextField
-                id='select'
-                select
+                // id='select'
+                // select
                 variant='filled'
                 label='País'
-                defaultValue={Cookies.get("country") || countries[0].code}
+                fullWidth
+                // defaultValue={Cookies.get("country") || countries[0].code}
                 {...register("country", {
                   required: "Este campo es requerido",
                 })}

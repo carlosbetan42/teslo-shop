@@ -6,9 +6,20 @@ import { ShopLayout } from "../../components/layouts";
 import { useContext } from "react";
 import { CartContext } from "../../context";
 import { countries } from "../../utils";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const SummaryPage = () => {
+  const router = useRouter();
   const { shippingAddress, numberOfItems } = useContext(CartContext);
+  console.log(shippingAddress);
+
+  useEffect(() => {
+    if (!Cookies.get("firstName")) {
+      router.push("/checkout/address");
+    }
+  }, []);
 
   if (!shippingAddress) {
     return <></>;
@@ -51,7 +62,8 @@ const SummaryPage = () => {
               <Typography>
                 {city}, {zip}
               </Typography>
-              <Typography>{countries.find((c) => c.code === country)?.name}</Typography>
+              {/* <Typography>{countries.find((c) => c.code === country)?.name}</Typography> */}
+              <Typography>{country}</Typography>
               <Typography>{phone}</Typography>
 
               <Divider sx={{ my: 1 }}></Divider>
